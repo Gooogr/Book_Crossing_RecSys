@@ -13,4 +13,7 @@ Get raw data and create data folders
 bash src/data/get_data.sh
 ```
 
-
+Run snakemake
+```
+snakemake -c2 all
+```
