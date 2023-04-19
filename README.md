@@ -8,7 +8,7 @@ pip3 install poetry
 poetry install --with dev
 ```
 
-Get raw data
+Get raw data and create data folders
 ```
 bash src/data/get_data.sh
 ```
