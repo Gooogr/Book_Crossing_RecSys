@@ -16,6 +16,7 @@ def prepare_rating_data(ratings_input_path: str) -> pd.DataFrame:
     ratings_df = ratings_df.rename(
         columns={"User-ID": "user_id", "ISBN": "isbn", "Book-Rating": "rating"}
     )
+    ratings_df['isbn'] = ratings_df['isbn'].str.replace(r"[^a-zA-Z0-9]+", "", regex=True)
     ratings_df = auto_opt_pd_dtypes(ratings_df)
     return ratings_df
 
@@ -121,9 +122,9 @@ def preprocess(
     books_df = prepare_book_data(books_input_path)
     users_df = prepare_user_data(users_input_path)
 
-    ratings_df.to_csv(ratings_output_path, index=False)
-    books_df.to_csv(books_output_path, index=False)
-    users_df.to_csv(users_output_path, index=False)
+    ratings_df.to_csv(ratings_output_path, index=False, sep=';')
+    books_df.to_csv(books_output_path, index=False, sep=';')
+    users_df.to_csv(users_output_path, index=False, sep=';')
 
 
 if __name__ == "__main__":
