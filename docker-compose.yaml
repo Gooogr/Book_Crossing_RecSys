@@ -3,7 +3,7 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: pass
-      MYSQL_DATABASE: mydatabase
+      MYSQL_DATABASE: recsys
     volumes:
       - ./src/sql:/docker-entrypoint-initdb.d
       - ./data/interim:/data
