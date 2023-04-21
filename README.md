@@ -17,3 +17,12 @@ Run snakemake
 ```
 snakemake -c2 all
 ```
+
+--------------
+
+## Database 
+
+Open MyPHPAdmin in `localhost:8080`:
+* Network - *IP from server container* (solved by `PMA_HOST: db`)
+* Login - root
+* Password - pass

@@ -1,0 +1,11 @@
+CREATE TABLE Persons (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255),
+  age INT
+);
+
+CREATE TABLE Cities (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255),
+  population INT
+);
