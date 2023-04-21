@@ -16,7 +16,9 @@ def prepare_rating_data(ratings_input_path: str) -> pd.DataFrame:
     ratings_df = ratings_df.rename(
         columns={"User-ID": "user_id", "ISBN": "isbn", "Book-Rating": "rating"}
     )
-    ratings_df['isbn'] = ratings_df['isbn'].str.replace(r"[^a-zA-Z0-9]+", "", regex=True)
+    ratings_df["isbn"] = ratings_df["isbn"].str.replace(
+        r"[^a-zA-Z0-9]+", "", regex=True
+    )
     ratings_df = auto_opt_pd_dtypes(ratings_df)
     return ratings_df
 
@@ -26,7 +28,11 @@ def prepare_book_data(books_input_path: str) -> pd.DataFrame:
     Prepare raw BX-Books.csv for the further analysis
     """
     books_df = pd.read_csv(
-        books_input_path, sep=";", encoding_errors="replace", on_bad_lines="skip", low_memory=False
+        books_input_path,
+        sep=";",
+        encoding_errors="replace",
+        on_bad_lines="skip",
+        low_memory=False,
     )
     books_df = books_df.rename(
         columns={
@@ -122,9 +128,9 @@ def preprocess(
     books_df = prepare_book_data(books_input_path)
     users_df = prepare_user_data(users_input_path)
 
-    ratings_df.to_csv(ratings_output_path, index=False, sep=';')
-    books_df.to_csv(books_output_path, index=False, sep=';')
-    users_df.to_csv(users_output_path, index=False, sep=';')
+    ratings_df.to_csv(ratings_output_path, index=False, sep=";")
+    books_df.to_csv(books_output_path, index=False, sep=";")
+    users_df.to_csv(users_output_path, index=False, sep=";")
 
 
 if __name__ == "__main__":
