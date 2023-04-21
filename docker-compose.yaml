@@ -6,6 +6,8 @@ services:
       MYSQL_DATABASE: mydatabase
     volumes:
       - ./src/sql:/docker-entrypoint-initdb.d
+      - ./data/interim:/data
+    command: --secure-file-priv=""
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -15,9 +17,3 @@ services:
       - "8080:80"
     depends_on:
       - db
-  
-# Use docker inspect <container name> to find IPAddress for login
-# Admin panel: `localhost:8080`:
-# * Network - *IP from server container*
-# * Login - root
-# * Password - pass  
