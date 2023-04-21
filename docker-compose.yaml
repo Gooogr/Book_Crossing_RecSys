@@ -1,0 +1,17 @@
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+  phpadmin:
+    image: phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+    ports:
+      - "8080:80"
+  
+# Use docker inspect <container name> to find IPAddress for login
+# Admin panel: `localhost:8080`:
+# * Network - *IP from server container*
+# * Login - root
+# * Password - pass  
