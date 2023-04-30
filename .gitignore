@@ -1,5 +1,5 @@
 # Project
-/data
+/data/*/*.csv
 
 # Python
 */__pycache__
