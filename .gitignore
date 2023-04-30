@@ -1,12 +1,10 @@
 # Project
-/data
+/data/*/*.csv
+.env
 
 # Python
 */__pycache__
 __pycache__
-
-# Poetry
-poetry.lock
 
 #Snakemake
 .snakemake
