@@ -1,19 +1,44 @@
-services:
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_DATABASE: recsys
-    volumes:
-      - ./src/sql:/docker-entrypoint-initdb.d
-      - ./data/interim:/data
-    command: --secure-file-priv=""
+version: '3.8'
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+services:
+   
+  db:
+    container_name: book_postgres
+    image: postgres:15.1-alpine
+    restart: always
     environment:
-      PMA_HOST: db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_MLFLOW_DB}
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256 
+    volumes:
+      - book_postgres_volume:/var/lib/postgresql/data # Save db data state
     ports:
-      - "8080:80"
-    depends_on:
-      - db
+      - "5432:5432"
+    networks:
+      - postgres
+      
+  pgadmin:
+    container_name: book_pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
+    user: root
+    volumes:
+       - ./src/database/pgadmin_config.json:/pgadmin4/servers.json
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+     
+volumes:
+  book_postgres_volume:
+    name: book_postgres_volume
+    external: true
