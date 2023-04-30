@@ -99,6 +99,8 @@ def prepare_user_data(users_input_path: str) -> pd.DataFrame:
     users_df.loc[users_df["city"] == "", "city"] = np.nan
     users_df.loc[users_df["country"] == "", "country"] = np.nan
 
+    users_df = users_df.drop(columns=['location'])
+
     users_df = auto_opt_pd_dtypes(users_df)
     return users_df
 
